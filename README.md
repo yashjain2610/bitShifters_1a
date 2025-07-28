@@ -116,11 +116,3 @@ The convenience CLI is commented in `main_pipeline_pdfs.py` – simply uncomment
 See `output_jsons/` for five real-world PDFs – each produced with zero manual cleaning.
 
 ---
-
-## 10. License
-© 2024 Artifex Software, Inc. Portions licensed under AGPL-3.0.  
-This hackathon wrapper script is released under MIT for evaluation.
-
----
-
-*Made with ♥ for Adobe PDF Extract Hackathon.* 
