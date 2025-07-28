@@ -1,26 +1,24 @@
-# syntax=docker/dockerfile:1
-# Base image: slim python for smaller size. Ensure AMD64 platform.
-FROM --platform=linux/amd64 python:3.10-slim
+FROM --platform=linux/amd64 python:3.9-slim
 
-# Prevent Python from writing pyc files and buffering stdout/stderr
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
-
-# Set work directory
 WORKDIR /app
 
-# Install system dependencies (none required for CPU-only PyMuPDF wheel)
-# If additional system libraries are required, add them here.
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libffi-dev \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install python dependencies first to leverage Docker cache
-COPY requirements.txt ./
+# Copy requirements first for better Docker caching
+COPY requirements.txt .
+
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy project source
+# Copy all source code
 COPY . .
 
-# Create mount point directories (they will be over-mounted at runtime)
+# Create input and output directories
 RUN mkdir -p /app/input /app/output
 
-# Default command – process all PDFs in /app/input and write JSONs to /app/output
-CMD ["python", "run_in_container.py"] 
+# Set the main script as the entry point
+CMD ["python", "main_pipeline_pdfs.py"] 

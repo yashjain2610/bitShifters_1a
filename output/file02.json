@@ -1,29 +1,29 @@
 {
-  "title": "Overview  Foundation Level Extensions",
+  "title": "Overview Foundation Level Extensions",
   "outline": [
     {
       "level": "H1",
-      "text": "Overview  Foundation Level Extensions",
+      "text": "Overview Foundation Level Extensions",
       "page": 1
     },
     {
       "level": "H3",
-      "text": "Version 1.0\nInternational Software Testing Qualifications Board",
+      "text": "Version 1.0",
       "page": 1
     },
     {
       "level": "H2",
-      "text": "Version 1.0\nInternational Software Testing Qualifications Board",
+      "text": "International Software Testing Qualifications Board",
       "page": 1
     },
     {
       "level": "H3",
-      "text": "International\nOverview\nSoftware Testing\nFoundation Level Extension – Agile Tester Qualifications Board\nRevision History",
+      "text": "Revision History",
       "page": 3
     },
     {
       "level": "H3",
-      "text": "International\nOverview\nSoftware Testing\nFoundation Level Extension – Agile Tester Qualifications Board\nTable of Contents",
+      "text": "Table of Contents",
       "page": 4
     },
     {
@@ -33,17 +33,22 @@
     },
     {
       "level": "H3",
-      "text": "International\nOverview\nSoftware Testing\nFoundation Level Extension – Agile Tester Qualifications Board\nAcknowledgements",
+      "text": "Acknowledgements",
       "page": 5
     },
     {
       "level": "H3",
-      "text": "International\nOverview\nSoftware Testing\nFoundation Level Extension – Agile Tester Qualifications Board\n1. Introduction to the Foundation Level Extensions",
+      "text": "1. Introduction to the Foundation Level Extensions",
       "page": 6
     },
     {
       "level": "H3",
-      "text": "International\nOverview\nSoftware Testing\nFoundation Level Extension – Agile Tester Qualifications Board\n2. Introduction to Foundation Level Agile Tester Extension",
+      "text": "2. Introduction to Foundation Level Agile Tester Extension",
+      "page": 7
+    },
+    {
+      "level": "H3",
+      "text": "2.1 Intended Audience",
       "page": 7
     },
     {
@@ -53,13 +58,48 @@
     },
     {
       "level": "H3",
+      "text": "2.2 Career Paths for Testers",
+      "page": 7
+    },
+    {
+      "level": "H3",
+      "text": "People possessing an ISTQB Foundation Level Extension – Agile Tester certificate may use the Certified\nTester Foundation Level acronym CTFL-AT.",
+      "page": 7
+    },
+    {
+      "level": "H3",
+      "text": "2.3 Learning Objectives",
+      "page": 7
+    },
+    {
+      "level": "H3",
+      "text": "2.4 Entry Requirements",
+      "page": 8
+    },
+    {
+      "level": "H3",
+      "text": "2.5 Structure and Course Duration",
+      "page": 8
+    },
+    {
+      "level": "H3",
       "text": "The Foundation Level Extension – Agile Tester syllabus has no shared or common elements with the\nFoundation Level syllabus.",
       "page": 8
     },
     {
       "level": "H3",
-      "text": "International\nOverview\nSoftware Testing\nFoundation Level Extension – Agile Tester Qualifications Board\n2.6 Keeping It Current",
+      "text": "2.6 Keeping It Current",
       "page": 9
+    },
+    {
+      "level": "H1",
+      "text": "3. Overview of the Foundation Level Extension – Agile Tester Syllabus",
+      "page": 10
+    },
+    {
+      "level": "H3",
+      "text": "3.1 Business Outcomes",
+      "page": 10
     },
     {
       "level": "H3",
@@ -73,12 +113,17 @@
     },
     {
       "level": "H3",
-      "text": "International\nOverview\nSoftware Testing\nFoundation Level Extension – Agile Tester Qualifications Board\n4. References\n4.1 Trademarks",
+      "text": "3.2 Content",
+      "page": 10
+    },
+    {
+      "level": "H3",
+      "text": "4. References",
       "page": 12
     },
     {
       "level": "H3",
-      "text": "International\nOverview\nSoftware Testing\nFoundation Level Extension – Agile Tester Qualifications Board\n4. References\n4.1 Trademarks",
+      "text": "4.1 Trademarks",
       "page": 12
     },
     {
@@ -88,7 +133,7 @@
     },
     {
       "level": "H3",
-      "text": "ISTQB [® ] is a registered trademark of the International Software Testing Qualifications Board\n4.2 Documents and Web Sites",
+      "text": "4.2 Documents and Web Sites",
       "page": 12
     }
   ]

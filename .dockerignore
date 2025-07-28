@@ -1,0 +1,51 @@
+# Exclude git files
+.git/
+.gitignore
+
+# Exclude Docker files
+Dockerfile
+.dockerignore
+
+# Exclude cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Exclude virtual environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Exclude IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Exclude OS files
+.DS_Store
+Thumbs.db
+
+# Exclude README and documentation
+*.md
+README*
+
+# Exclude output directories from local development
+output/
+output_jsons/
+
+# Exclude sample data that might be large
+input/
+
+# Exclude any logs
+*.log
+
+# Exclude graphs and images
+*.png
+*.jpg
+*.jpeg
+*.gif 

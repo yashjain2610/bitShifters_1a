@@ -5,9 +5,7 @@ import json
 import re
 import os
 import glob
-import pymupdf
-import pymupdf4llm
-
+from to_chunk_json import pdf_to_json_chunks
 
 def process_pdf_to_json(pdf_path, output_path):
     """
@@ -20,66 +18,6 @@ def process_pdf_to_json(pdf_path, output_path):
     Returns:
         dict: The final schema output containing title and outline
     """
-    def remove_markdown_symbols(text):
-        """
-        Remove markdown-specific symbols from text.
-        """
-        # Remove headers (#, ##, ###, etc.)
-        text = re.sub(r'^#{1,6}\s+', '', text, flags=re.MULTILINE)
-        
-        # Remove bold (**text** or __text__)
-        text = re.sub(r'\*\*(.*?)\*\*', r'\1', text)
-        text = re.sub(r'__(.*?)__', r'\1', text)
-        
-        # Remove italic (*text* or _text_)
-        text = re.sub(r'\*(.*?)\*', r'\1', text)
-        text = re.sub(r'_(.*?)_', r'\1', text)
-        
-        # Remove strikethrough (~~text~~)
-        text = re.sub(r'~~(.*?)~~', r'\1', text)
-        
-        # Remove inline code (`text`)
-        text = re.sub(r'`(.*?)`', r'\1', text)
-        
-        # Remove code blocks (```text```)
-        text = re.sub(r'```.*?```', '', text, flags=re.DOTALL)
-        
-        # Remove links [text](url) -> text
-        text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
-        
-        # Remove images ![alt](url) -> alt
-        text = re.sub(r'!\[([^\]]*)\]\([^)]+\)', r'\1', text)
-        
-        # Remove blockquotes (> text)
-        text = re.sub(r'^>\s+', '', text, flags=re.MULTILINE)
-        
-        # Remove horizontal rules (---, ___, ***)
-        text = re.sub(r'^[-*_]{3,}$', '', text, flags=re.MULTILINE)
-        
-        # Clean up extra whitespace
-        text = re.sub(r'\n\s*\n', '\n\n', text)
-        text = text.strip()
-        
-        return text
-
-    def pdf_to_json_chunks(pdf_path):
-        # open the document
-        doc = pymupdf.open(pdf_path)
-        # produce a single markdown string
-        md = pymupdf4llm.to_markdown(
-            doc,
-            force_text=True,      # make sure we get text even over images
-            page_chunks=False,    # we only want the natural blank-line chunks
-            write_images=False,
-            embed_images=False
-        ).strip()
-
-        # split on two-or-more newlines → each chunk is one element
-        raw = re.split(r'\n{2,}', md)
-        # strip out any purely-empty elements and remove markdown symbols
-        chunks = [remove_markdown_symbols(c.strip()) for c in raw if c.strip()]
-        return chunks
-
     
     def extract_lines_from_pdf(pdf_path):
         doc = fitz.open(pdf_path)
@@ -581,8 +519,25 @@ def process_pdfs_directory(input_directory, output_directory):
     
     print(f"\nProcessing complete! Successfully processed {len(processed_files)} out of {len(pdf_files)} files.")
     return processed_files
+# # Example usage (commented out):
+# input_dir = r"C:\Users\Yatharth\Desktop\desktop1\AI\adobe_hack\sample_dataset\pdfs"
+# output_dir = r"C:\Users\Yatharth\Desktop\desktop1\AI\adobe_hack\adobe_final_submission\output_jsons"
+# results = process_pdfs_directory(input_dir, output_dir)
 
-# Example usage (commented out):
-input_dir = r"C:\Users\Yatharth\Desktop\desktop1\AI\adobe_hack\adobe_final_submission\input"
-output_dir = r"C:\Users\Yatharth\Desktop\desktop1\AI\adobe_hack\adobe_final_submission\output_jsons"
-results = process_pdfs_directory(input_dir, output_dir)
+
+if __name__ == "__main__":
+    # Docker-compatible paths
+    input_dir = "/app/input"
+    output_dir = "/app/output"
+    
+    print("Starting PDF processing pipeline...")
+    print(f"Input directory: {input_dir}")
+    print(f"Output directory: {output_dir}")
+    
+    # Process all PDFs in the input directory
+    results = process_pdfs_directory(input_dir, output_dir)
+    
+    if results:
+        print(f"\n✅ Pipeline completed successfully! Processed {len(results)} files.")
+    else:
+        print("\n❌ No files were processed.")
