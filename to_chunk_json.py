@@ -48,21 +48,39 @@ def remove_markdown_symbols(text):
     return text
 
 def pdf_to_json_chunks(pdf_path):
-    # open the document
-    doc = pymupdf.open(pdf_path)
-    # produce a single markdown string
-    md = to_markdown(
-        doc,
-        force_text=True,      # make sure we get text even over images
-        page_chunks=False,    # we only want the natural blank-line chunks
-        write_images=False,
-        embed_images=False
-    ).strip()
+    try:
+        print(f"[DEBUG] Opening PDF: {pdf_path}")
+        # open the document
+        doc = pymupdf.open(pdf_path)
+        print(f"[DEBUG] Document opened successfully. Page count: {doc.page_count}")
+        
+        # produce a single markdown string
+        md = to_markdown(
+            doc,
+            force_text=True,      # make sure we get text even over images
+            page_chunks=False,    # we only want the natural blank-line chunks
+            write_images=False,
+            embed_images=False
+        ).strip()
+        
+        print(f"[DEBUG] Markdown extracted. Length: {len(md)} characters")
+        print(f"[DEBUG] First 200 characters: {repr(md[:200])}")
 
-    # split on two-or-more newlines → each chunk is one element
-    raw = re.split(r'\n{2,}', md)
-    # strip out any purely-empty elements and remove markdown symbols
-    chunks = [remove_markdown_symbols(c.strip()) for c in raw if c.strip()]
-    return chunks
+        # split on two-or-more newlines → each chunk is one element
+        raw = re.split(r'\n{2,}', md)
+        print(f"[DEBUG] Split into {len(raw)} raw chunks")
+        
+        # strip out any purely-empty elements and remove markdown symbols
+        chunks = [remove_markdown_symbols(c.strip()) for c in raw if c.strip()]
+        print(f"[DEBUG] Final chunks count: {len(chunks)}")
+        if chunks:
+            print(f"[DEBUG] First chunk preview: {repr(chunks[0][:100])}")
+        
+        return chunks
+    except Exception as e:
+        print(f"[ERROR] Exception in pdf_to_json_chunks: {e}")
+        import traceback
+        traceback.print_exc()
+        return []
 
 
