@@ -92,7 +92,52 @@ numpy
 
 ---
 
-## 7. Usage
+## 7. Docker Usage
+The project includes a Dockerfile for containerized execution. This is the recommended approach for consistent environments.
+
+### Prerequisites
+- Docker Desktop installed and running
+- PDF files placed in the `input/` directory
+
+### Build and Run
+From the project root directory:
+
+```powershell
+# Build the Docker image
+docker build -t pdf-pipeline .
+
+# Run the container (Windows PowerShell)
+docker run --rm `
+  --mount type=bind,source="${PWD}\input",target=/app/input `
+  --mount type=bind,source="${PWD}\output",target=/app/output `
+  pdf-pipeline
+```
+
+### Single-line command (Windows PowerShell)
+```powershell
+docker build -t pdf-pipeline .; docker run --rm --mount type=bind,source="${PWD}\input",target=/app/input --mount type=bind,source="${PWD}\output",target=/app/output pdf-pipeline
+```
+
+### Linux/macOS
+```bash
+# Build
+docker build -t pdf-pipeline .
+
+# Run
+docker run --rm \
+  -v "$(pwd)/input:/app/input" \
+  -v "$(pwd)/output:/app/output" \
+  pdf-pipeline
+```
+
+### What happens
+1. The container processes all PDF files from the mounted `input/` directory
+2. JSON output files are written to the mounted `output/` directory
+3. The container is automatically removed after completion (`--rm` flag)
+
+---
+
+## 8. Usage
 ```python
 from main_pipeline_pdfs import process_pdfs_directory
 
