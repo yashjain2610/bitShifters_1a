@@ -10,6 +10,10 @@ RUN apt-get update && apt-get install -y \
     fonts-dejavu-core \
     fonts-liberation \
     locales \
+    libfreetype6-dev \
+    libjpeg-dev \
+    libopenjp2-7-dev \
+    libfontconfig1-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Set up locale for proper Unicode handling

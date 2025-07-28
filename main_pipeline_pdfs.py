@@ -24,13 +24,23 @@ def process_pdf_to_json(pdf_path, output_path):
         all_lines = []
 
         for page_num, page in enumerate(doc):
-            blocks = page.get_text("dict")["blocks"]
+            # Use the same text extraction flags as the working chunk extraction
+            textflags = (
+                0
+                | fitz.mupdf.FZ_STEXT_CLIP
+                | fitz.mupdf.FZ_STEXT_ACCURATE_BBOXES
+                | 32768  # FZ_STEXT_COLLECT_STYLES
+            )
+            blocks = page.get_text("dict", flags=textflags)["blocks"]
             for block_num, block in enumerate(blocks):
                 if "lines" in block:
                     for line_num, line in enumerate(block["lines"]):
                         line_text = ""
                         for span in line["spans"]:
-                            line_text += span["text"]
+                            # Clean up text extraction issues
+                            span_text = span["text"]
+                            if span_text:  # Only add non-empty text
+                                line_text += span_text
                         all_lines.append({
                             "page": page_num,
                             "block_number": block_num,
